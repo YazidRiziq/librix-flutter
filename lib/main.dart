@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/auth_provider.dart';
+import 'screens/login_screen.dart';
 
 void main() {
-  runApp(const LibrixApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child: const LibrixApp(),
+    ),
+  );
 }
 
 class LibrixApp extends StatelessWidget {
@@ -15,11 +25,7 @@ class LibrixApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Librix Frontend Ready!'),
-        ),
-      ),
+      home: LoginScreen(), 
     );
   }
 }
