@@ -35,4 +35,26 @@ class ApiService {
     
     return await http.get(url, headers: headers);
   }
+
+  // Fungsi PUT khusus untuk melakukan update data
+  Future<http.Response> put(String endpoint, Map<String, dynamic> body) async {
+    final url = Uri.parse('${Constants.baseUrl}$endpoint'); 
+    
+    final prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+    };
+
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+
+    return await http.put(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+  }
 }
