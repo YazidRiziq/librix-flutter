@@ -68,7 +68,7 @@ class LoanHistory {
   final String title;
   final String author;
   final String coverUrl;
-  final String? actualReturnDate; // Pakai tanda tanya (?) karena bisa bernilai null
+  final String? actualReturnDate;
   final String borrowedDate;
   final String dueDate;
   final String statusBadge;
@@ -92,7 +92,7 @@ class LoanHistory {
       title: json['title'] ?? 'Unknown Title',
       author: json['author'] ?? 'Unknown Author',
       coverUrl: json['cover_url'] ?? 'https://placehold.co/400x600/png',
-      actualReturnDate: json['actualReturnDate'], // Biarkan null jika dari database null
+      actualReturnDate: json['actualReturnDate'],
       borrowedDate: json['borrowedDate'] ?? '-',
       dueDate: json['dueDate'] ?? '-',
       statusBadge: json['statusBadge'] ?? 'Unknown',

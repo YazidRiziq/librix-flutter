@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Kita gunakan warna utama dari desain (Biru Gelap)
+    // warna utama dari desain (Biru Gelap)
     const Color primaryDarkBlue = Color(0xFF111860);
 
     return Scaffold(

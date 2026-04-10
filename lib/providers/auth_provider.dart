@@ -8,11 +8,11 @@ class AuthProvider with ChangeNotifier {
   final ApiService _apiService = ApiService();
   String? _token;
 
-  // Mengecek apakah user sudah punya token (sudah login)
+  // Mengecek apakah user punya token (sudah login)
   bool get isAuthenticated => _token != null;
 
   // ---------------------------------------
-  // Fungsi untuk login user ke Spring Boot
+  // Fungsi untuk login
   // ---------------------------------------
   Future<bool> login(String email, String password) async {
     try {
@@ -24,16 +24,15 @@ class AuthProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         
-        // Mengambil data dari response JSON Spring Boot kamu
         _token = data['token']; 
-        final String name = data['name']; // Mengambil nama ("Baim")
-        final String userEmail = data['email']; // Mengambil email
-        final String memID = data['id']; // Mengambil memID (ID pengguna)
+        final String name = data['name'];
+        final String userEmail = data['email'];
+        final String memID = data['id'];
 
-        // Membuka brankas penyimpanan lokal HP
+        // Membuka brankas penyimpanan lokal
         final prefs = await SharedPreferences.getInstance();
         
-        // Menyimpan data-data tersebut ke dalam brankas
+        // Menyimpan data-data ke dalam brankas lokal
         await prefs.setString('token', _token!);
         await prefs.setString('name', name);
         await prefs.setString('email', userEmail);
@@ -49,7 +48,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   // -------------------------------------------------
-  // Fungsi untuk mendaftarkan user baru ke Spring Boot
+  // Fungsi untuk Register
   // -------------------------------------------------
   Future<bool> register(String name, String email, String telp, String address, String password) async {
     try {
